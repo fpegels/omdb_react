@@ -2,8 +2,8 @@ module.exports = {
     mode: 'development',
     entry: './src/index.js',
     output: {
-      filename: "bundle.js",
-      path: __dirname + '/../back/public'
+      path: __dirname,
+      filename: "./public/bundle.js",
     },
     resolve: {
       extensions: ['.js', '.jsx']

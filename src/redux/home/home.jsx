@@ -1,6 +1,26 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import store from '../store';
 
-export default (/*{ currentSong, start, songs }*/) => (
-  
-  <p>Este es home!</p>
-);
+
+function MovieContainer(props) {
+  return (
+
+   <div>1. {props.movie.movie.Plot}</div>
+  )
+}
+
+const mapStateToProps = function(state) {
+  return {
+    movie: state.movie
+  }
+}
+
+// const mapDispatchToProps = function (dispatch) {
+//   return {
+//     fetchMovie: () => dispatch(fetchMovie())
+//   }
+// }
+
+
+export default connect(mapStateToProps)(MovieContainer);

@@ -1,8 +1,12 @@
 import React  from 'react';
 import axios from 'axios';
 import { Route, Redirect, Switch } from 'react-router-dom';
-import Sidebar from './sidebar/Sidebar';
+import Header from './header/header';
 import Home from './home/home';
+import Footer from './footer/footer';
+import SearchMovie from './searchmovie/search.container';
+import store from './store';
+import { fetchMovie } from './actions/movies-actions';
 
 export default class Main extends React.Component {
     constructor(props){
@@ -13,11 +17,12 @@ export default class Main extends React.Component {
     //   this.addSong = this.addSong.bind(this);
     }
     
-    // componentDidMount() {
-    //   axios.get('/api/albums')
-    //     .then(res => res.data)
-    //     .then(albums => this.setState({ albums }));
-    // }
+    componentDidMount() {
+      // axios.get('/api/albums')
+      //   .then(res => res.data)
+      //   .then(albums => this.setState({ albums }));
+      // store.dispatch(fetchMovie())
+    }
     
     // selectAlbum(albumId) {
     //   axios.get(`/api/albums/${albumId}`)
@@ -31,14 +36,15 @@ export default class Main extends React.Component {
     //   } = this.state;
       return (
         <div id="main" className="container-fluid">
-          <Sidebar /*playlists={playlists}*/ />
+          <Header /*playlists={playlists}*/ />
           <div className="col-xs-10">
             <Switch>
-                <Route exact path="/home" render={() => <Home /> } />
+                <Route exact path="/home" render={() => <SearchMovie /> } />
                 {/* <Route path="/lyrics" render={() => <LyricsContainer />}/> */}
               <Redirect from="/" to="/home" />
             </Switch>
           </div>
+          <Footer /*playlists={playlists}*/ />
           {/* <Player 
             currentSong={currentSong}
           /> */}

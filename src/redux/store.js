@@ -6,6 +6,6 @@ import  thunkMiddleware from 'redux-thunk'
 
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
-export default createStore(combineReducers({movie: moviesReducer /*, player: playerReducer*/}),
+export default createStore(combineReducers({movies: moviesReducer /*, player: playerReducer*/}),
                          /* preloadedState, */ 
                          composeEnhancers(applyMiddleware(createLogger(), thunkMiddleware)));

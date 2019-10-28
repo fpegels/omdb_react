@@ -1,43 +1,53 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import SearchComponent from './search.component'
-import { fetchMovie } from '../actions/movies-actions';
+import { fetchMovies } from '../actions/movies-actions';
 
 
 class Search extends React.Component {
 constructor(props){
     super(props)
-    this.state ={
-
-    }
-    this.searchbyTitle = this.searchbyTitle.bind(this)
+    // this.state ={}
     this.changeHandler = this.changeHandler.bind(this)
-}
-
-searchbyTitle(event){
-    this.props.fetchMovie(this.state['text'])
+    this.searchbyTitle = this.searchbyTitle.bind(this)
+    // this.selectMovie = this.selectMovie.bind(this)
 }
 
 changeHandler(event){
     this.setState({text: event.target.value})
 }
 
+searchbyTitle(event){
+    event.preventDefault();
+    console.log(this.state['text'])
+    this.props.fetchMovies(this.state['text'])
+}
+
+
+// selectMovie(event){
+//     console.log(event.target)
+//     event.preventDefault();
+//     this.props.fetchMovie()
+
+
+// }
 
     render(){
-        return <SearchComponent movie={this.props.movie} searchbyTitle={this.searchbyTitle} changeHandler={this.changeHandler}/>
+        return <SearchComponent movies={this.props.movies} searchbyTitle={this.searchbyTitle} changeHandler={this.changeHandler} /*selectMovie={this.selectMovie}*//>
     }
 
 }
 
 const mapStateToProps = function(state) {
     return {
-      movie: state.movie
+      movies: state.movies
     }
   }
   
   const mapDispatchToProps = function (dispatch) {
     return {
-      fetchMovie: (text) => dispatch(fetchMovie(text))
+      fetchMovies: (text) => dispatch(fetchMovies(text)),
+    //   fetchMovie: (text) => dispatch(fetchMovie(text))
     }
   }
 

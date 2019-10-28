@@ -2,11 +2,10 @@ import React  from 'react';
 import axios from 'axios';
 import { Route, Redirect, Switch } from 'react-router-dom';
 import Header from './header/header';
-import Home from './home/home';
 import Footer from './footer/footer';
-import SearchMovie from './searchmovie/search.container';
-import store from './store';
-import { fetchMovie } from './actions/movies-actions';
+import SearchMovie from './searchmovie/search.container'
+import MovieDetail from './moviedetail/moviedetail.container'
+
 
 export default class Main extends React.Component {
     constructor(props){
@@ -40,6 +39,7 @@ export default class Main extends React.Component {
           <div className="col-xs-10">
             <Switch>
                 <Route exact path="/home" render={() => <SearchMovie /> } />
+                <Route exact path="/moviedetail/:id" render={({ match }) => <MovieDetail imdbID={match.params.id}/> } />
                 {/* <Route path="/lyrics" render={() => <LyricsContainer />}/> */}
               <Redirect from="/" to="/home" />
             </Switch>

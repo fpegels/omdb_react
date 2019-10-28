@@ -3,18 +3,18 @@ import { connect } from 'react-redux';
 import store from '../store';
 
 
-function MovieContainer(props) {
-  return (
+// function MovieContainer(props) {
+//   return (
 
-   <div>1. {props.movie.movie.Plot}</div>
-  )
-}
+//    <div>1. {props.movie.movie.Plot}</div>
+//   )
+// }
 
-const mapStateToProps = function(state) {
-  return {
-    movie: state.movie
-  }
-}
+// const mapStateToProps = function(state) {
+//   return {
+//     movie: state.movie
+//   }
+// }
 
 // const mapDispatchToProps = function (dispatch) {
 //   return {
@@ -23,4 +23,4 @@ const mapStateToProps = function(state) {
 // }
 
 
-export default connect(mapStateToProps)(MovieContainer);
+// export default connect(mapStateToProps)(MovieContainer);

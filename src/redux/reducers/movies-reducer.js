@@ -1,4 +1,4 @@
-const initialState = { movies: [], movie:{} };
+const initialState = { movies: [], movie:{}, favoritas:[] };
 
 export default function reducer (state = initialState, action) {
     let newState={}
@@ -10,6 +10,10 @@ export default function reducer (state = initialState, action) {
         case 'SET_MOVIE':
             // code block
               newState = {...state, movie: action.movie}
+          break;
+          case 'SET_MOVIE_FAVORITAS':
+            // code block
+              newState = {...state, favoritas: action.favoritas}
           break;
 
         default:

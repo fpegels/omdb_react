@@ -5,15 +5,15 @@ import { Link, Route } from 'react-router-dom';
 export default function (props) {
     
     return (
-      <div id="movie" className="container-fluid">
+      <div id="movie">
         
-        <form onSubmit={props.searchbyTitle}>
+        <form onSubmit={props.searchbyTitle} class="form-inline my-2 my-lg-0">
           <div>
-            <input type="text" placeholder="search for a Movie" onChange={props.changeHandler}/>
+            <input type="text" placeholder="pelicula a buscar" onChange={props.changeHandler}/>
           </div>
-          <button type="submit">Search for Lyrics</button>
+          <button type="submit">Buscar peli!</button>
         </form>
-
+        <div className='container'>
     { props.movies.movies.Search ? props.movies.movies.Search.map(movie => (
     <div key={movie.imdbID} class="card" style={{width: '18rem'}}>
             <img src={movie.Poster} class="card-img-top" alt="..."/>
@@ -21,6 +21,7 @@ export default function (props) {
                 <h5 class="card-title">{movie.Title}</h5>
                 <p class="card-text">{movie.Plot}</p>
                 <Link to={`/moviedetail/${movie.imdbID}`}>VER DETALLE</Link>
+                <button type="submit" onClick={() => props.addFavorita(movie.imdbID)}>Agregar a Favoritos</button>
             </div>
             
         </div>
@@ -29,6 +30,7 @@ export default function (props) {
     }
     
 
+      </div>
       </div>
     );
   }

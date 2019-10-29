@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import SearchComponent from './search.component'
-import { fetchMovies } from '../actions/movies-actions';
+import { fetchMovies, addFavorita } from '../actions/movies-actions';
 
 
 class Search extends React.Component {
@@ -10,7 +10,7 @@ constructor(props){
     // this.state ={}
     this.changeHandler = this.changeHandler.bind(this)
     this.searchbyTitle = this.searchbyTitle.bind(this)
-    // this.selectMovie = this.selectMovie.bind(this)
+    this.addFavorita = this.addFavorita.bind(this)
 }
 
 changeHandler(event){
@@ -23,6 +23,13 @@ searchbyTitle(event){
     this.props.fetchMovies(this.state['text'])
 }
 
+addFavorita(imdbID){
+  // event.preventDefault();
+  console.log(imdbID)
+  const credentials = JSON.parse(localStorage.getItem('JWT'));
+  if (credentials) this.props.addFavorita(credentials['token'], imdbID)
+}
+
 
 // selectMovie(event){
 //     console.log(event.target)
@@ -33,7 +40,10 @@ searchbyTitle(event){
 // }
 
     render(){
-        return <SearchComponent movies={this.props.movies} searchbyTitle={this.searchbyTitle} changeHandler={this.changeHandler} /*selectMovie={this.selectMovie}*//>
+        return <SearchComponent movies={this.props.movies}
+                                searchbyTitle={this.searchbyTitle}
+                                changeHandler={this.changeHandler}
+                                addFavorita= {this.addFavorita}/>
     }
 
 }
@@ -47,7 +57,8 @@ const mapStateToProps = function(state) {
   const mapDispatchToProps = function (dispatch) {
     return {
       fetchMovies: (text) => dispatch(fetchMovies(text)),
-    //   fetchMovie: (text) => dispatch(fetchMovie(text))
+      addFavorita: (token, favorita) => dispatch(addFavorita(token, favorita)), 
+ 
     }
   }
 

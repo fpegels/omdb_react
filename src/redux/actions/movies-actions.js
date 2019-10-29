@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { baseURL } from '../../config'
+// import { baseURL } from '../../config'
 
 
 export const setMovies = function(movies){
@@ -34,3 +34,57 @@ export const fetchMovies = function (text) {
         });
     };
   };
+
+
+  export const setFavoritas = function(favoritas){
+    return {
+        type: 'SET_MOVIE_FAVORITAS',
+        favoritas: favoritas
+    }
+  }
+
+
+  export const fetchFavoritas = function (authToken) {
+    return function (dispatch, getState) {
+        axios.get(`http://localhost:3000/users/favoritas`, {headers: {
+            'Authorization': 'bearer ' + authToken,
+          }})
+        .then(response => {
+            dispatch(setFavoritas(response.data.favoritas)); 
+
+            // if (newuser.data.success) dispatch(setUserName_Temp(newuser.data.username))
+        //   dispatch(setMovie(movie.data)); 
+        });
+    };
+  };
+
+  export const addFavorita = function (authToken, favorita) {
+    console.log("@@@@ enviado este imdbID", favorita)
+    return function (dispatch, getState) {
+        axios.put(`http://localhost:3000/users/favoritas`, {favorita: favorita}, {headers: {
+            'Authorization': 'bearer ' + authToken,
+          }})
+        .then(response => {
+            // dispatch(setFavoritas(response.data.favoritas)); 
+        alert(`La pelicula con imdbID: ${favorita} fue agregada exitosamente`)
+            // if (newuser.data.success) dispatch(setUserName_Temp(newuser.data.username))
+        //   dispatch(setMovie(movie.data)); 
+        });
+    };
+  };
+
+  export const removeFavorita = function (authToken, favorita) {
+    console.log("@@@@ enviado este imdbID", favorita)
+    return function (dispatch, getState) {
+        axios.post(`http://localhost:3000/users/favoritas`, {favorita: favorita}, {headers: {
+            'Authorization': 'bearer ' + authToken,
+          }})
+        .then(response => {
+            // dispatch(setFavoritas(response.data.favoritas)); 
+        alert(`La pelicula con imdbID: ${favorita} fue eliminada exitosamente`)
+            // if (newuser.data.success) dispatch(setUserName_Temp(newuser.data.username))
+        //   dispatch(setMovie(movie.data)); 
+        });
+    };
+  };
+
